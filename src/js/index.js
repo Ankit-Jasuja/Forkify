@@ -1,4 +1,6 @@
 // Global app controller
 
-import x from './test';
-console.log(`imported value is ${x}`);
+//import num from './test';
+//console.log(`imported value is ${num}`);
+
+console.log('Ankit');
