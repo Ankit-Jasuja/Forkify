@@ -6,8 +6,8 @@ class Search{
     }
     async getResults(){
         try{
-            const result = await axios(`https://forkify-api.herokuapp.com/api/search?q=${this.query}`);
-            console.log(result.data.recipes);
+            const res = await axios(`https://forkify-api.herokuapp.com/api/search?q=${this.query}`);
+            this.result = res.data.recipes;
         }
         catch(error){
             alert(error);
