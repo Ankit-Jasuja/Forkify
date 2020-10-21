@@ -14,6 +14,25 @@ export const clearSearch = ()=>{
     doms.searchField.value="";
 }
 
+//receipeTitle = 'Tomato pasta with rec sauce'
+//acc:0,0<17,newtitle=[Tomato]
+//acc:6,6<17,newtitle=[Tomato,pasta]
+
+const LimitRecipeLength = (receipeTitle,limit=17)=>{
+    const newTitle=[];
+      if(receipeTitle.length > limit){
+         const receipesParts = receipeTitle.split(' ');
+         receipesParts.reduce((acc,cur)=>{
+             if(acc+cur.length <= limit){
+                 newTitle.push(cur);
+             }
+             return acc+cur.length;
+         },0);
+      return `${newTitle.join(' ')}....`
+      }
+      return receipeTitle;
+}
+
 const RenderReceipe = (rec)=>{
  const recipeHtml = `
  <li>
@@ -22,7 +41,7 @@ const RenderReceipe = (rec)=>{
          <img src=${rec.image_url} alt="Test">
      </figure>
      <div class="results__data">
-         <h4 class="results__name">${rec.title}</h4>
+         <h4 class="results__name">${LimitRecipeLength(rec.title)}</h4>
          <p class="results__author">${rec.publisher}</p>
      </div>
  </a>

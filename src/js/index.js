@@ -13,7 +13,7 @@ const SearchReceipe = async ()=>{
     await state.search.getResults();
     searchView.RenderReceipes(state.search.result);
     searchView.clearSearch();
-    console.log(state.search.result);
+    //console.log(state.search.result);
 }
 
 document.querySelector('.search').addEventListener('submit',(e)=>{
