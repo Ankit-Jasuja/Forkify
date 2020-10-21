@@ -1,13 +1,13 @@
 export const doms = {
-    searchButton:document.querySelector('.search'),
-    searchField:document.querySelector('.search__field'),
-    receipesSection: document.querySelector('.results__list'),
-    receipesLoaderSection:document.querySelector('.results')
-}
+  searchButton: document.querySelector(".search"),
+  searchField: document.querySelector(".search__field"),
+  receipesSection: document.querySelector(".results__list"),
+  receipesLoaderSection: document.querySelector(".results"),
+};
 
 export const elements = {
-    loader:'loader'
-}
+  loader: "loader",
+};
 
 export const ShowLoader = (parent) => {
   console.log(parent);
@@ -21,7 +21,7 @@ export const ShowLoader = (parent) => {
   parent.insertAdjacentHTML("afterbegin", loader);
 };
 
-export const RemoveLoader = ()=>{
-    const loader = document.querySelector(`.${elements.loader}`);//getting loader here,as initially it is not on the main page
-    loader.parentElement.removeChild(loader);
-}
+export const RemoveLoader = () => {
+  const loader = document.querySelector(`.${elements.loader}`); //getting loader here,as initially it is not on the main page
+  loader.parentElement.removeChild(loader);
+};
