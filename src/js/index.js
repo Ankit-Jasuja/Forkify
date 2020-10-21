@@ -1,4 +1,5 @@
 // Global app controller
+import doms from './views/base';
 import Search from './models/Search';
 import * as searchView from './views/searchView';
 
@@ -16,7 +17,7 @@ const SearchReceipe = async ()=>{
     //console.log(state.search.result);
 }
 
-document.querySelector('.search').addEventListener('submit',(e)=>{
+doms.searchButton.addEventListener('submit',(e)=>{
     e.preventDefault(),
     SearchReceipe();
 })
