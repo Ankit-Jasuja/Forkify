@@ -1,6 +1,7 @@
-import doms from './base'
+import {doms} from './base'
 
 export const getSearchedInput = () => doms.searchField.value;
+
 export const RenderReceipes = (receipes) =>{
     receipes.forEach(receipe => {
         RenderReceipe(receipe);
@@ -34,7 +35,7 @@ const LimitRecipeLength = (receipeTitle,limit=17)=>{
 }
 
 const RenderReceipe = (rec)=>{
- const recipeHtml = `
+const recipeHtml = `
  <li>
  <a class="results__link results" href=${rec.recipe_id}>
      <figure class="results__fig">
@@ -49,5 +50,4 @@ const RenderReceipe = (rec)=>{
  `;
  const allRecipesSection = doms.receipesSection;
  allRecipesSection.insertAdjacentHTML('beforeend',recipeHtml);
-
 };
