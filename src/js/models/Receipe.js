@@ -80,14 +80,14 @@ class Receipe {
       //there is a number but no unit
       objIngredient = {
         count: parseInt(ingredientArray[0], 10),
-        unit: 0,
+        unit: "",
         ingredient: ingredientArray.slice(1).join(" "),
       };
     } else if (unitIndex === -1) {
       //there is no unit and no number at 1st position e.g. "red onion to taste, thinly sliced"
       objIngredient = {
         count: 1,
-        unit: 0,
+        unit:"",
         ingredient: ingredient,
       };
     }
