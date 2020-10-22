@@ -1,5 +1,6 @@
 // Global app controller
 import Search from './models/Search';
+import Receipe from './models/Receipe';
 import {doms,ShowLoader,RemoveLoader} from './views/base';
 import * as searchView from './views/searchView';
 
@@ -39,3 +40,11 @@ doms.PaginationSection.addEventListener("click", (e) => {
   const navigatePage = parseInt(targetButton.getAttribute("data-Goto"), 10); //or targetButton.dataset.Goto
   searchView.RenderReceipes(state.search.result, navigatePage, 10);
 });
+
+/*
+Recipe Controller
+*/
+
+state.receipe = new Receipe(35477);
+state.receipe.getRecipe();
+console.log(state.receipe);
