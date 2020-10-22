@@ -9,22 +9,26 @@ import * as searchView from './views/searchView';
 const state={};
 
 const SearchReceipe = async () => {
+  try {
     //clear already rendered recipes
     searchView.clearReceipes();
     //show loader
     ShowLoader(doms.receipesLoaderSection);
     //get receipes from api
     //const query = searchView.getSearchedInput();
-    const query="PIZZA";//only for testing
+    const query = "PIZZA"; //only for testing
     state.search = new Search(query);
     await state.search.getResults();
     //remove loader after getting data
     RemoveLoader();
     //render recipes
-    searchView.RenderReceipes(state.search.result,1,10);
+    searchView.RenderReceipes(state.search.result, 1, 10);
     //clear search input
     searchView.clearSearchInput();
     //console.log(state.search.result);
+  } catch (error) {
+    alert("something went wrong while searching for recipes");
+  }
 };
 
 doms.searchButton.addEventListener("submit", (e) => {
@@ -45,19 +49,23 @@ doms.PaginationSection.addEventListener("click", (e) => {
 /*
 Recipe Controller
 */
-const GetSelectedRecipe = async()=>{
-   const id = window.location.hash.replace('#',"");
-   if(id){
+const GetSelectedRecipe = async () => {
+  const id = window.location.hash.replace("#", "");
+  if (id) {
     console.log(id);
     state.receipe = new Receipe(id);
-    await state.receipe.getRecipe();
-    state.receipe.calcTime();
-    state.receipe.calcServings();
-    console.log(state.receipe.ingredients);
-    state.receipe.parseIngredients();
-    console.log(state.receipe.ingredients);
-   }
-}
+    try {
+      await state.receipe.getRecipe();
+      state.receipe.calcTime();
+      state.receipe.calcServings();
+      console.log(state.receipe.ingredients);
+      state.receipe.parseIngredients();
+      console.log(state.receipe.ingredients);
+    } catch (error) {
+      alert("error processing receipe");
+    }
+  }
+};
 
 //test code
 window.addEventListener('load', (e) => {
