@@ -3,7 +3,8 @@ export const doms = {
   searchField: document.querySelector(".search__field"),
   receipesSection: document.querySelector(".results__list"),
   receipesLoaderSection: document.querySelector(".results"),
-  PaginationSection:document.querySelector(".results__pages")
+  PaginationSection:document.querySelector(".results__pages"),
+  recipeSection:document.querySelector(".recipe")
 };
 
 export const elements = {

@@ -3,6 +3,7 @@ import Search from './models/Search';
 import Receipe from './models/Receipe';
 import {doms,ShowLoader,RemoveLoader} from './views/base';
 import * as searchView from './views/searchView';
+import * as recipeView from './views/recipeView';
 
 //global state of app
 //search object,current recipe object,shopping list object,liked recipe
@@ -52,17 +53,22 @@ Recipe Controller
 const GetSelectedRecipe = async () => {
   const id = window.location.hash.replace("#", "");
   if (id) {
-    console.log(id);
+    recipeView.clearRecipe();
+    ShowLoader(doms.recipeSection);
     state.receipe = new Receipe(id);
     try {
       await state.receipe.getRecipe();
+      state.receipe.parseIngredients();
+
       state.receipe.calcTime();
       state.receipe.calcServings();
       console.log(state.receipe.ingredients);
-      state.receipe.parseIngredients();
-      console.log(state.receipe.ingredients);
-    } catch (error) {
-      alert("error processing receipe");
+
+      RemoveLoader();
+      recipeView.renderRecipe(state.receipe);
+    } 
+    catch (error) {
+      alert(error);
     }
   }
 };
