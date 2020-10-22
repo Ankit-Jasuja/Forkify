@@ -3,6 +3,7 @@ export const doms = {
   searchField: document.querySelector(".search__field"),
   receipesSection: document.querySelector(".results__list"),
   receipesLoaderSection: document.querySelector(".results"),
+  PaginationSection:document.querySelector(".results__pages")
 };
 
 export const elements = {
@@ -10,7 +11,6 @@ export const elements = {
 };
 
 export const ShowLoader = (parent) => {
-  console.log(parent);
   const loader = `
     <div class = ${elements.loader}>
        <svg>
