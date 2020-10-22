@@ -79,7 +79,7 @@ const LimitRecipeLength = (receipeTitle, limit = 17) => {
 const RenderReceipe = (rec) => {
   const recipeHtml = `
  <li>
- <a class="results__link results" href=${rec.recipe_id}>
+ <a class="results__link results" href="#${rec.recipe_id}">
      <figure class="results__fig">
          <img src=${rec.image_url} alt=${rec.title}>
      </figure>
