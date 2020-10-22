@@ -14,7 +14,8 @@ const SearchReceipe = async () => {
     //show loader
     ShowLoader(doms.receipesLoaderSection);
     //get receipes from api
-    const query = searchView.getSearchedInput();
+    //const query = searchView.getSearchedInput();
+    const query="PIZZA";//only for testing
     state.search = new Search(query);
     await state.search.getResults();
     //remove loader after getting data
@@ -44,7 +45,35 @@ doms.PaginationSection.addEventListener("click", (e) => {
 /*
 Recipe Controller
 */
+const GetSelectedRecipe = async()=>{
+   const id = window.location.hash.replace('#',"");
+   if(id){
+    console.log(id);
+    state.receipe = new Receipe(id);
+    await state.receipe.getRecipe();
+    state.receipe.calcTime();
+    state.receipe.calcServings();
+    console.log(state.receipe.ingredients);
+    state.receipe.parseIngredients();
+    console.log(state.receipe.ingredients);
+   }
+}
 
-state.receipe = new Receipe(35477);
-state.receipe.getRecipe();
-console.log(state.receipe);
+//test code
+window.addEventListener('load', (e) => {
+  e.preventDefault(), 
+  SearchReceipe();
+});
+
+
+window.addEventListener('hashchange',GetSelectedRecipe);
+window.addEventListener('load',GetSelectedRecipe);//this is needed if user directly opens <http://localhost:8080/#47746>,we need id in this case also
+
+
+
+
+
+
+
+
+
