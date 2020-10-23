@@ -25,7 +25,6 @@ const SearchReceipe = async () => {
     searchView.RenderReceipes(state.search.result, 1, 10);
     //clear search input
     searchView.clearSearchInput();
-    //console.log(state.search.result);
   } catch (error) {
     alert("something went wrong while searching for recipes");
   }
@@ -60,7 +59,6 @@ const GetSelectedRecipe = async () => {
     state.receipe = new Receipe(id);
     try {
       await state.receipe.getRecipe();
-      console.log(state.receipe.ingredients);
       state.receipe.parseIngredients();
       console.log(state.receipe.ingredients);
 
@@ -79,6 +77,22 @@ const GetSelectedRecipe = async () => {
 
 window.addEventListener('hashchange',GetSelectedRecipe);
 window.addEventListener('load',GetSelectedRecipe);//this is needed if user directly opens <http://localhost:8080/#47746>,we need id in this case also
+
+doms.recipeSection.addEventListener("click", (e) => {
+  //.btn-decrease * => any child of btn decrease
+  //if btn-decrease or any of the child is clikced
+  if (e.target.matches(".btn-decrease,.btn-decrease *")) {
+    if (state.receipe.servings > 1) {
+      state.receipe.updateServingsIngredients("dec");
+    }
+    recipeView.updateServingsIngredientsinDom(state.receipe);
+  } 
+  else if (e.target.matches(".btn-increase,.btn-increase *")) {
+    state.receipe.updateServingsIngredients("inc");
+    recipeView.updateServingsIngredientsinDom(state.receipe);
+  }
+  console.log(state.receipe.ingredients);
+});
 
 
 

@@ -112,6 +112,17 @@ class Receipe {
     this.servings = 4;
   }
 
+  updateServingsIngredients(type) {
+    //update servings
+    const newServings = type === "dec" ? this.servings - 1 : this.servings + 1;
+    console.log(newServings); 
+    //update ingredients
+    this.ingredients.forEach((el) => {
+      el.count = el.count * (newServings / this.servings);
+    });
+    this.servings = newServings;
+  };
+
 }
 
 export default Receipe;
