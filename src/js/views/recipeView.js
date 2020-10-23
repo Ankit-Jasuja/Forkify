@@ -1,9 +1,31 @@
 import { doms } from "./base";
+import {Fraction} from 'fractional';
+
+const FormatCount = (count)=>{
+     //count : 1.5 => 1 1/2
+     //count : 0.5 => 1/2
+     if(count)        //unusual but never know
+     {
+        const arr = count.toString().split(".").map(el=>parseInt(el,10));
+        if(arr.length===1){
+            return count;
+        }
+        if(arr[0]===0){
+           const fr = new Fraction(count);
+           return `${fr.numerator}/${fr.denominator}`;
+        }
+        else{
+           const fr = new Fraction(count - arr[0]);
+           return `${arr[0]} ${fr.numerator}/${fr.denominator}`;
+        }
+     }
+}
+
 const createIngredientDom = (ingredient)=>`<li class="recipe__item">
                                     <svg class="recipe__icon">
                                         <use href="img/icons.svg#icon-check"></use>
                                     </svg>
-                                    <div class="recipe__count">${ingredient.count}</div>
+                                    <div class="recipe__count">${FormatCount(ingredient.count)}</div>
                                     <div class="recipe__ingredient">
                                         <span class="recipe__unit">${ingredient.unit}</span>
                                         ${ingredient.ingredient}
