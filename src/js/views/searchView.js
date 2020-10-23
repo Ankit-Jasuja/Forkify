@@ -45,6 +45,15 @@ export const RenderReceipes = (receipes,currentPage,numberPerPage) => {
     RenderPageButtons(receipes,currentPage,numberPerPage);
 };
 
+export const HighLightSelectedRecipe = (recipeId) => {
+  //remove highlighted class from all anchor elements
+  const elements = Array.from(document.querySelectorAll(".results__link"));
+  elements.forEach((el) => el.classList.remove("results__link--active"));
+
+  //select link based on id
+  document.querySelector(`a[href*="${recipeId}"]`).classList.add("results__link--active");
+};
+
 export const DeletePageButtons = ()=>{
     doms.PaginationSection.innerHTML="";
 }

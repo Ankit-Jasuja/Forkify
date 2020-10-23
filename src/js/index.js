@@ -54,6 +54,9 @@ const GetSelectedRecipe = async () => {
   if (id) {
     recipeView.clearRecipe();
     ShowLoader(doms.recipeSection);
+    if (state.search){                         //highlight only when recipe seacrh has been done
+      searchView.HighLightSelectedRecipe(id);
+    }
     state.receipe = new Receipe(id);
     try {
       await state.receipe.getRecipe();
@@ -66,6 +69,7 @@ const GetSelectedRecipe = async () => {
 
       RemoveLoader();
       recipeView.renderRecipe(state.receipe);
+      
     } 
     catch (error) {
       alert(error);

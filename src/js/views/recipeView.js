@@ -4,7 +4,7 @@ import {Fraction} from 'fractional';
 const FormatCount = (count)=>{
      //count : 1.5 => 1 1/2
      //count : 0.5 => 1/2
-     if(count)        //unusual but never know
+     if(count)//unusual but never know
      {
         const arr = count.toString().split(".").map(el=>parseInt(el,10));
         if(arr.length===1){
