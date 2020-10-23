@@ -1,6 +1,7 @@
 // Global app controller
 import Search from './models/Search';
 import Receipe from './models/Receipe';
+import List from './models/List';
 import {doms,ShowLoader,RemoveLoader} from './views/base';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
@@ -60,7 +61,7 @@ const GetSelectedRecipe = async () => {
     try {
       await state.receipe.getRecipe();
       state.receipe.parseIngredients();
-      console.log(state.receipe.ingredients);
+     // console.log(state.receipe.ingredients);
 
       state.receipe.calcTime();
       state.receipe.calcServings();
@@ -94,6 +95,8 @@ doms.recipeSection.addEventListener("click", (e) => {
   console.log(state.receipe.ingredients);
 });
 
+
+window.l = new List(); //for testing
 
 
 
