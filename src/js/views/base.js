@@ -4,7 +4,8 @@ export const doms = {
   receipesSection: document.querySelector(".results__list"),
   receipesLoaderSection: document.querySelector(".results"),
   PaginationSection:document.querySelector(".results__pages"),
-  recipeSection:document.querySelector(".recipe")
+  recipeSection:document.querySelector(".recipe"),
+  shoppingSection:document.querySelector(".shopping__list")
 };
 
 export const elements = {
