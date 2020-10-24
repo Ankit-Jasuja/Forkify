@@ -51,7 +51,7 @@ export const HighLightSelectedRecipe = (recipeId) => {
   elements.forEach((el) => el.classList.remove("results__link--active"));
 
   //select link based on id
-  document.querySelector(`a[href*="${recipeId}"]`).classList.add("results__link--active");
+  document.querySelector(`.results__link[href*="${recipeId}"]`).classList.add("results__link--active");
 };
 
 export const DeletePageButtons = ()=>{
@@ -70,7 +70,7 @@ export const clearSearchInput = () => {
 //acc:0,0<17,newtitle=[Tomato]
 //acc:6,6<17,newtitle=[Tomato,pasta]
 
-const LimitRecipeLength = (receipeTitle, limit = 17) => {
+export const LimitRecipeLength = (receipeTitle, limit = 17) => {
   const newTitle = [];
   if (receipeTitle.length > limit) {
     const receipesParts = receipeTitle.split(" ");

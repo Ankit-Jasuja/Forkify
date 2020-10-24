@@ -133,13 +133,15 @@ const HandleLikes = () => {
     likesView.toggleLikeButton(true);
 
     //remove like from UI
+    likesView.RemoveLike(Id);
   }
   //user has not liked the current Recipe
   else {
-    state.likes.addLike(Id,state.receipe.title,state.receipe.author,state.receipe.img); //add the like
+    const like = state.likes.addLike(Id,state.receipe.title,state.receipe.author,state.receipe.img); //add the like
     //toggle the like button
     likesView.toggleLikeButton(false);
     //add like to UI
+    likesView.AddLike(like);
   }
   likesView.toggleLikeMenu(state.likes.getNumerOfLikes());
 };

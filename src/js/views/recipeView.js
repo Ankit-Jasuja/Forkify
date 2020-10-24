@@ -1,4 +1,4 @@
-import { doms, elements } from "./base";
+import { doms } from "./base";
 import {Fraction} from 'fractional';
 
 const FormatCount = (count)=>{
