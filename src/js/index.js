@@ -6,6 +6,8 @@ import {doms,ShowLoader,RemoveLoader} from './views/base';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
+import Likes from './models/Likes';
+
 
 //global state of app
 //search object,current recipe object,shopping list object,liked recipe
@@ -90,7 +92,6 @@ Shopping list Controller
 const AddItemToCart = (ingredients) =>{
    if(!state.list)
     state.list = new List();
-    
     ingredients.forEach(el => {
       const item = state.list.addItem(el.count,el.unit,el.ingredient)
       listView.RenderShoppingItem(item);
@@ -114,6 +115,28 @@ doms.shoppingSection.addEventListener('click',e=>{
   }
 })
 
+/*
+Likes Controller
+*/
+
+const HandleLikes = () => {
+  if (!state.likes) state.likes = new Likes();
+  const Id = state.receipe.id;
+
+  //user has liked the current Recipe
+  if (state.likes.isLiked(Id)) {
+    state.likes.deleteLike(Id); //remove the like
+    //toggle the like button
+    //remove like from UI
+  }
+  //user has not liked the current Recipe
+  else {
+    state.likes.addLike(Id,state.receipe.title,state.receipe.author,state.receipe.img); //add the like
+    //toggle the like button
+    //add like to UI
+  }
+};
+
 //handling recipe button clicks
 doms.recipeSection.addEventListener("click", (e) => {
   //.btn-decrease * => any child of btn decrease
@@ -124,14 +147,19 @@ doms.recipeSection.addEventListener("click", (e) => {
     }
     recipeView.updateServingsIngredientsinDom(state.receipe);
   } 
+  //increase button event handler
   else if (e.target.matches(".btn-increase,.btn-increase *")) {
     state.receipe.updateServingsIngredients("inc");
     recipeView.updateServingsIngredientsinDom(state.receipe);
   }
+  //add ingredients to cart
   else if(e.target.matches(".recipe__btn--add,.recipe__btn--add *")){
     AddItemToCart(state.receipe.ingredients);
   }
-  //console.log(state.receipe.ingredients);
+  //handle like button event handler
+  else if(e.target.matches(".recipe__love,.recipe__love *")){
+    HandleLikes();
+  }
 });
 
 
