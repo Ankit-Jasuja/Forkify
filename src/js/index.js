@@ -5,11 +5,15 @@ import List from './models/List';
 import {doms,ShowLoader,RemoveLoader} from './views/base';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
+import * as listView from './views/listView';
 
 //global state of app
 //search object,current recipe object,shopping list object,liked recipe
 const state={};
 
+/*
+Search Controller
+*/
 const SearchReceipe = async () => {
   try {
     //clear already rendered recipes
@@ -79,6 +83,38 @@ const GetSelectedRecipe = async () => {
 window.addEventListener('hashchange',GetSelectedRecipe);
 window.addEventListener('load',GetSelectedRecipe);//this is needed if user directly opens <http://localhost:8080/#47746>,we need id in this case also
 
+/*
+Shopping list Controller
+*/
+
+const AddItemToCart = (ingredients) =>{
+   if(!state.list)
+    state.list = new List();
+    
+    ingredients.forEach(el => {
+      const item = state.list.addItem(el.count,el.unit,el.ingredient)
+      listView.RenderShoppingItem(item);
+    });
+}
+
+doms.shoppingSection.addEventListener('click',e=>{
+  console.log(state.list.items);
+  const id = e.target.closest(".shopping__item").getAttribute("data-itemid"); //to get the id,traverse to li (with which data-itemid attribute is attached)
+  //handle delete event of shopping cart
+  if(e.target.matches(".shopping__delete,.shopping__delete *")){
+   state.list.deleteItem(id); //delete from state
+   listView.DeleteShoppingItem(id); //delete from UI
+   console.log(state.list.items);
+  }
+  //handle the count update
+  else if(e.target.matches(".shopping__count-value")){
+     const newValue = e.target.value;
+     state.list.updateItemCount(id,newValue);
+     console.log(state.list.items);
+  }
+})
+
+//handling recipe button clicks
 doms.recipeSection.addEventListener("click", (e) => {
   //.btn-decrease * => any child of btn decrease
   //if btn-decrease or any of the child is clikced
@@ -92,11 +128,12 @@ doms.recipeSection.addEventListener("click", (e) => {
     state.receipe.updateServingsIngredients("inc");
     recipeView.updateServingsIngredientsinDom(state.receipe);
   }
-  console.log(state.receipe.ingredients);
+  else if(e.target.matches(".recipe__btn--add,.recipe__btn--add *")){
+    AddItemToCart(state.receipe.ingredients);
+  }
+  //console.log(state.receipe.ingredients);
 });
 
-
-window.l = new List(); //for testing
 
 
 

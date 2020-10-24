@@ -13,7 +13,7 @@ export default class List {
          ingredients:ingredients
      }
      this.items.push(item);
-     return this.items; //returning in this case is just good practice
+     return item; //returning in this case is just good practice
     }
 
     deleteItem(id){
