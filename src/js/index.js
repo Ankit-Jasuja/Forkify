@@ -6,6 +6,7 @@ import {doms,ShowLoader,RemoveLoader} from './views/base';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
+import * as likesView from './views/likesView';
 import Likes from './models/Likes';
 
 
@@ -73,7 +74,7 @@ const GetSelectedRecipe = async () => {
       state.receipe.calcServings();
 
       RemoveLoader();
-      recipeView.renderRecipe(state.receipe);
+      recipeView.renderRecipe(state.receipe,state.likes.isLiked(state.receipe.id));
       
     } 
     catch (error) {
@@ -118,7 +119,7 @@ doms.shoppingSection.addEventListener('click',e=>{
 /*
 Likes Controller
 */
-
+state.likes = new Likes();//for testing
 const HandleLikes = () => {
   if (!state.likes) state.likes = new Likes();
   const Id = state.receipe.id;
@@ -127,12 +128,15 @@ const HandleLikes = () => {
   if (state.likes.isLiked(Id)) {
     state.likes.deleteLike(Id); //remove the like
     //toggle the like button
+    likesView.toggleLikeButton(true);
+
     //remove like from UI
   }
   //user has not liked the current Recipe
   else {
     state.likes.addLike(Id,state.receipe.title,state.receipe.author,state.receipe.img); //add the like
     //toggle the like button
+    likesView.toggleLikeButton(false);
     //add like to UI
   }
 };
