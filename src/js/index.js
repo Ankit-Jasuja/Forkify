@@ -74,7 +74,7 @@ const GetSelectedRecipe = async () => {
       state.receipe.calcServings();
 
       RemoveLoader();
-      recipeView.renderRecipe(state.receipe,state.likes.isLiked(state.receipe.id));
+      recipeView.renderRecipe(state.receipe,state.likes.isLiked(id));
       
     } 
     catch (error) {
@@ -120,6 +120,8 @@ doms.shoppingSection.addEventListener('click',e=>{
 Likes Controller
 */
 state.likes = new Likes();//for testing
+likesView.toggleLikeMenu(state.likes.getNumerOfLikes);
+
 const HandleLikes = () => {
   if (!state.likes) state.likes = new Likes();
   const Id = state.receipe.id;
@@ -139,6 +141,7 @@ const HandleLikes = () => {
     likesView.toggleLikeButton(false);
     //add like to UI
   }
+  likesView.toggleLikeMenu(state.likes.getNumerOfLikes());
 };
 
 //handling recipe button clicks
