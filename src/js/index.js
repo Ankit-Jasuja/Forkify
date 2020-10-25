@@ -119,8 +119,6 @@ doms.shoppingSection.addEventListener('click',e=>{
 /*
 Likes Controller
 */
-state.likes = new Likes();//for testing
-likesView.toggleLikeMenu(state.likes.getNumerOfLikes);
 
 const HandleLikes = () => {
   if (!state.likes) state.likes = new Likes();
@@ -141,10 +139,23 @@ const HandleLikes = () => {
     //toggle the like button
     likesView.toggleLikeButton(false);
     //add like to UI
-    likesView.AddLike(like);
+    likesView.RenderLike(like);
   }
   likesView.toggleLikeMenu(state.likes.getNumerOfLikes());
 };
+
+//retrive likes form local storage and render them under like menu
+window.addEventListener("load",()=>{
+  state.likes = new Likes();
+  //read likes from storages
+  state.likes.readLikesFromStorage();
+   //toggle like button
+  likesView.toggleLikeMenu(state.likes.getNumerOfLikes());
+  console.log(state.likes.likes);
+  state.likes.likes.forEach((like)=>{
+    likesView.RenderLike(like);
+  })
+})
 
 //handling recipe button clicks
 doms.recipeSection.addEventListener("click", (e) => {

@@ -10,7 +10,8 @@ import {LimitRecipeLength} from "../views/searchView"
      doms.likesMenu.style.visibility = numLikes > 0 ? "visible": "hidden";
 }
 
-export const AddLike = (like) =>{
+export const RenderLike = (like) =>{
+ console.log("RenderingLike")   ;
     const markup = `<li>
     <a class="likes__link" href="#${like.id}">
         <figure class="likes__fig">
