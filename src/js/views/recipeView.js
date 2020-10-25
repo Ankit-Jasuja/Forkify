@@ -1,21 +1,22 @@
 import { doms } from "./base";
 import {Fraction} from 'fractional';
 
-const FormatCount = (count)=>{
+const FormatCount = (Count)=>{
      //count : 1.5 => 1 1/2
      //count : 0.5 => 1/2
-     if(count)//unusual but never know
+     if(Count)//unusual but never know
      {
-        const arr = count.toString().split(".").map(el=>parseInt(el,10));
+        const newCount = Math.round(Count*10000)/10000; //round it to 4 decimal places to not get exception
+        const arr = newCount.toString().split(".").map(el=>parseInt(el,10));
         if(arr.length===1){
-            return count;
+            return newCount;
         }
         if(arr[0]===0){
-           const fr = new Fraction(count);
+           const fr = new Fraction(newCount);
            return `${fr.numerator}/${fr.denominator}`;
         }
         else{
-           const fr = new Fraction(count - arr[0]);
+           const fr = new Fraction(newCount - arr[0]);
            return `${arr[0]} ${fr.numerator}/${fr.denominator}`;
         }
      }
