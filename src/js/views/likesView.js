@@ -12,7 +12,7 @@ import {LimitRecipeLength} from "../views/searchView"
 
 export const AddLike = (like) =>{
     const markup = `<li>
-    <a class="likes__link" href="${like.id}">
+    <a class="likes__link" href="#${like.id}">
         <figure class="likes__fig">
             <img src="${like.img}">
         </figure>
