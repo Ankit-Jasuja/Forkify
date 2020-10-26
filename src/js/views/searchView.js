@@ -14,6 +14,7 @@ const DisplayPageBUttons = (curPage, type) =>
     </button>`;
 
 const RenderPageButtons = (recipes,curPage,numberPerPage) =>{
+    DeletePageButtons();
     //check if on first page,last page or middle pages and show buttons accordingly
     const numberOfPages = Math.ceil(recipes.length / numberPerPage);
     let buttons;
