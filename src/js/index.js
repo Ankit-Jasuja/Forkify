@@ -68,7 +68,6 @@ const GetSelectedRecipe = async () => {
     try {
       await state.receipe.getRecipe();
       state.receipe.parseIngredients();
-     // console.log(state.receipe.ingredients);
 
       state.receipe.calcTime();
       state.receipe.calcServings();
@@ -100,19 +99,16 @@ const AddItemToCart = (ingredients) =>{
 }
 
 doms.shoppingSection.addEventListener('click',e=>{
-  console.log(state.list.items);
   const id = e.target.closest(".shopping__item").getAttribute("data-itemid"); //to get the id,traverse to li (with which data-itemid attribute is attached)
   //handle delete event of shopping cart
   if(e.target.matches(".shopping__delete,.shopping__delete *")){
    state.list.deleteItem(id); //delete from state
    listView.DeleteShoppingItem(id); //delete from UI
-   console.log(state.list.items);
   }
   //handle the count update
   else if(e.target.matches(".shopping__count-value")){
      const newValue = e.target.value;
      state.list.updateItemCount(id,newValue);
-     console.log(state.list.items);
   }
 })
 
@@ -151,7 +147,6 @@ window.addEventListener("load",()=>{
   state.likes.readLikesFromStorage();
    //toggle like button
   likesView.toggleLikeMenu(state.likes.getNumerOfLikes());
-  console.log(state.likes.likes);
   state.likes.likes.forEach((like)=>{
     likesView.RenderLike(like);
   })

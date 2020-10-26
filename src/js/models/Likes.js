@@ -32,14 +32,10 @@ export default class Likes {
 
     persistLikes(){
        localStorage.setItem("likes",JSON.stringify(this.likes)); //convert array to string to save to loacl storage
-       console.log("persisting likes");
-       console.log(localStorage);
     }
 
     readLikesFromStorage(){
-       console.log("readLikesFromStorage") ;
       const likesInStorage = JSON.parse(localStorage.getItem("likes"));
-      console.log(likesInStorage) ;
       //restore likes from storage
       if(likesInStorage){
           this.likes = likesInStorage;

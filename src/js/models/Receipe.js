@@ -20,7 +20,6 @@ class Receipe {
   }
 
   parseIngredients() {
-    console.log("parsing");
     const unitsLong = [
       "tablespoons",
       "tablespoon",
@@ -115,7 +114,6 @@ class Receipe {
   updateServingsIngredients(type) {
     //update servings
     const newServings = type === "dec" ? this.servings - 1 : this.servings + 1;
-    console.log(newServings); 
     //update ingredients
     this.ingredients.forEach((el) => {
       el.count = el.count * (newServings / this.servings);
