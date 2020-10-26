@@ -19,6 +19,11 @@ so if user reloads a page, he can still see his favourite reciepes.
 ![alt text](https://i.imgur.com/MvXfmhZ.png)
 
 
+## A recipe can be liked and this favorite recipe appears under Like Menu
+
+![alt text](https://i.imgur.com/qFZgzAi.png?1)
+
+
 ## Pagination
 
 
